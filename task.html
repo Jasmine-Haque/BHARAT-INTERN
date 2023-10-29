@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Task Assignment</title>
+  </head>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .task-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #00588d;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 5px 0;
+    }
+
+    .completed {
+      text-decoration: line-through; /* Example: Apply a strike-through style for completed tasks */
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center">Task Assignment</h1>
+      <div class="task-form">
+        <label for="task-title"><strong>Assigned to:</strong></label>
+        <input type="text" id="assignee" placeholder="Name" required />
+
+        <label for="task-content"><strong>Description:</strong></label>
+        <input type="text" id="taskName" placeholder="Description" required />
+
+        <label for="datePicker"><strong>Due Date:</strong></label>
+        <input type="date" id="dueDate" required />
+        <button id="addTask">Add Task</button>
+      </div>
+      <ul id="taskList"></ul>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const taskNameInput = document.getElementById("taskName");
+        const assigneeInput = document.getElementById("assignee");
+        const dueDateInput = document.getElementById("dueDate");
+        const addTaskButton = document.getElementById("addTask");
+        const taskList = document.getElementById("taskList");
+
+        addTaskButton.addEventListener("click", function () {
+          const taskName = taskNameInput.value;
+          const assignee = assigneeInput.value;
+          const dueDate = dueDateInput.value;
+
+          if (taskName && assignee && dueDate) {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                <div class="task-details">
+                   
+                    <strong>Assigned to: </strong> ${assignee}<br>
+                    <strong>Task Description: </strong> ${taskName}<br>
+                    <strong>Due Date:</strong> ${dueDate}
+                </div>
+                <button class="complete-button">Mark as Complete</button>
+            `;
+            taskList.appendChild(listItem);
+
+            // Clear input fields
+            taskNameInput.value = "";
+            assigneeInput.value = "";
+            dueDateInput.value = "";
+
+            // Add a click event listener for the "Mark as Complete" button
+            const completeButton = listItem.querySelector(".complete-button");
+            completeButton.addEventListener("click", function () {
+              listItem.classList.add("completed");
+              completeButton.textContent = "Completed";
+              completeButton.disabled = true;
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
