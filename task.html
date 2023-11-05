@@ -21,7 +21,6 @@
       padding: 20px;
       border-radius: 5px;
       box-shadow: 05px 05px 03px 0px rgba(0, 0, 0, 0.3);
-      
     }
 
     h1 {
@@ -33,7 +32,6 @@
     .task-form {
       display: flex;
       flex-direction: column;
-      
     }
 
     input[type="text"],
@@ -73,7 +71,7 @@
     }
 
     .completed {
-      text-decoration: line-through; /* Example: Apply a strike-through style for completed tasks */
+      text-decoration: line-through;
     }
   </style>
   <body>
@@ -118,12 +116,10 @@
             `;
             taskList.appendChild(listItem);
 
-            // Clear input fields
             taskNameInput.value = "";
             assigneeInput.value = "";
             dueDateInput.value = "";
 
-            // Add a click event listener for the "Mark as Complete" button
             const completeButton = listItem.querySelector(".complete-button");
             completeButton.addEventListener("click", function () {
               listItem.classList.add("completed");
